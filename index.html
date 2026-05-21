@@ -1,361 +1,434 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AlphaLearn — Belajar Huruf Seru! 🎒</title>
-  <meta name="description" content="Platform belajar alfabet interaktif berbasis AI untuk anak PAUD & TK. Deteksi huruf via kamera, panduan menulis, kuis seru!">
+  <meta name="description"
+    content="Platform belajar alfabet interaktif berbasis AI untuk anak PAUD & TK. Deteksi huruf via kamera, panduan menulis, kuis seru!">
 
   <!-- CSS -->
   <link rel="stylesheet" href="src/css/base.css">
   <link rel="stylesheet" href="src/css/components.css">
   <link rel="stylesheet" href="src/css/pages.css">
 </head>
+
 <body>
 
-<!-- ══════════════ NAV ══════════════ -->
-<nav>
-  <div class="logo">Alpha<span>Learn</span> 🎒</div>
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showPage('home')">🏠 Beranda</button>
-    <button class="nav-tab" onclick="showPage('camera')">📷 Deteksi</button>
-    <button class="nav-tab" onclick="showPage('video')">✏️ Belajar</button>
-    <button class="nav-tab" onclick="showPage('quiz')">🎮 Kuis</button>
-    <button class="nav-tab" onclick="showPage('progress')">⭐ Progress</button>
-  </div>
-</nav>
-
-<!-- Reward overlay -->
-<div class="reward-flash" id="rewardFlash">
-  <span class="big-emoji" id="rewardEmoji">🎉</span>
-  <h2 id="rewardMsg">Hebat!</h2>
-  <p id="rewardSub">Kamu berhasil mengenali huruf!</p>
-</div>
-
-<!-- ══════════════ HOME ══════════════ -->
-<div class="page active" id="page-home">
-  <div class="hero">
-    <h1>Belajar Huruf Itu Seru! 🎨</h1>
-    <p>Platform belajar alfabet interaktif untuk anak PAUD &amp; TK</p>
-    <div class="hero-badges">
-      <div class="badge">📷 Deteksi Kamera AI</div>
-      <div class="badge">✏️ Panduan Menulis</div>
-      <div class="badge">🎮 Kuis Seru</div>
-      <div class="badge">⭐ Lacak Progress</div>
+  <!-- ══════════════ NAV ══════════════ -->
+  <nav>
+    <div class="logo">Alpha<span>Learn</span> 🎒</div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showPage('home')">🏠 Beranda</button>
+      <button class="nav-tab" onclick="showPage('camera')">📷 Deteksi</button>
+      <button class="nav-tab" onclick="showPage('video')">✏️ Belajar</button>
+      <button class="nav-tab" onclick="showPage('quiz')">🎮 Kuis</button>
+      <button class="nav-tab" onclick="showPage('progress')">⭐ Progress</button>
     </div>
+  </nav>
+
+  <!-- Reward overlay -->
+  <div class="reward-flash" id="rewardFlash">
+    <span class="big-emoji" id="rewardEmoji">🎉</span>
+    <h2 id="rewardMsg">Hebat!</h2>
+    <p id="rewardSub">Kamu berhasil mengenali huruf!</p>
   </div>
 
-  <h2 class="section-title">🚀 Mulai Belajar</h2>
-  <p class="section-subtitle">Pilih cara belajar yang kamu suka!</p>
-  <div class="card-grid" style="margin-bottom:2.5rem">
-    <div class="card">
-      <span class="card-icon">📷</span>
-      <h3>Deteksi Huruf AI</h3>
-      <p>Gambar huruf di kertas, lalu arahkan kamera! AI pintar kami akan menebak huruf yang kamu tulis.</p>
-      <button class="btn btn-primary" onclick="showPage('camera')">Coba Sekarang →</button>
+  <!-- ══════════════ HOME ══════════════ -->
+  <div class="page active" id="page-home">
+    <div class="hero">
+      <h1>Belajar Huruf Itu Seru! 🎨</h1>
+      <p>Platform belajar alfabet interaktif untuk anak PAUD &amp; TK</p>
+      <div class="hero-badges">
+        <div class="badge">📷 Deteksi Kamera AI</div>
+        <div class="badge">✏️ Panduan Menulis</div>
+        <div class="badge">🎮 Kuis Seru</div>
+        <div class="badge">⭐ Lacak Progress</div>
+      </div>
     </div>
-    <div class="card">
-      <span class="card-icon">✏️</span>
-      <h3>Cara Menulis Huruf</h3>
-      <p>Pelajari cara menulis setiap huruf dengan panduan langkah-langkah mudah dan latihan langsung!</p>
-      <button class="btn btn-secondary" onclick="showPage('video')">Mulai Belajar →</button>
+
+    <h2 class="section-title">🚀 Mulai Belajar</h2>
+    <p class="section-subtitle">Pilih cara belajar yang kamu suka!</p>
+    <div class="card-grid" style="margin-bottom:2.5rem">
+      <div class="card">
+        <span class="card-icon">📷</span>
+        <h3>Deteksi Huruf AI</h3>
+        <p>Gambar huruf di kertas, lalu arahkan kamera! AI pintar kami akan menebak huruf yang kamu tulis.</p>
+        <button class="btn btn-primary" onclick="showPage('camera')">Coba Sekarang →</button>
+      </div>
+      <div class="card">
+        <span class="card-icon">✏️</span>
+        <h3>Cara Menulis Huruf</h3>
+        <p>Pelajari cara menulis setiap huruf dengan panduan langkah-langkah mudah dan latihan langsung!</p>
+        <button class="btn btn-secondary" onclick="showPage('video')">Mulai Belajar →</button>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎮</span>
+        <h3>Kuis Menulis Seru</h3>
+        <p>Uji kemampuanmu dengan berbagai jenis kuis — pilihan ganda, menulis langsung, dan tebak gambar!</p>
+        <button class="btn btn-purple" onclick="showPage('quiz')">Main Kuis →</button>
+      </div>
     </div>
-    <div class="card">
-      <span class="card-icon">🎮</span>
-      <h3>Kuis Menulis Seru</h3>
-      <p>Uji kemampuanmu dengan berbagai jenis kuis — pilihan ganda, menulis langsung, dan tebak gambar!</p>
-      <button class="btn btn-purple" onclick="showPage('quiz')">Main Kuis →</button>
-    </div>
+
+    <h2 class="section-title">🔤 Alfabet Lengkap</h2>
+    <p class="section-subtitle">Klik huruf untuk mulai belajar!</p>
+    <div class="alphabet-grid" id="homeAlphabetGrid"></div>
   </div>
 
-  <h2 class="section-title">🔤 Alfabet Lengkap</h2>
-  <p class="section-subtitle">Klik huruf untuk mulai belajar!</p>
-  <div class="alphabet-grid" id="homeAlphabetGrid"></div>
-</div>
+  <!-- ══════════════ DETECT PAGE ══════════════ -->
+  <div class="page" id="page-camera">
+    <h2 class="section-title">🔍 Deteksi Huruf AI</h2>
+    <p class="section-subtitle">Pakai kamera langsung <b>atau</b> upload foto tulisan hurufmu — AI akan mendeteksinya!
+    </p>
 
-<!-- ══════════════ DETECT PAGE ══════════════ -->
-<div class="page" id="page-camera">
-  <h2 class="section-title">🔍 Deteksi Huruf AI</h2>
-  <p class="section-subtitle">Pakai kamera langsung <b>atau</b> upload foto tulisan hurufmu — AI akan mendeteksinya!</p>
+    <div class="detect-mode-tabs">
+      <button class="detect-tab active cam" id="tabCam" onclick="switchDetectMode('camera')">📷 Kamera Langsung</button>
+      <button class="detect-tab upload" id="tabUpload" onclick="switchDetectMode('upload')">🖼️ Upload Gambar</button>
+    </div>
 
-  <div class="detect-mode-tabs">
-    <button class="detect-tab active cam"  id="tabCam"    onclick="switchDetectMode('camera')">📷 Kamera Langsung</button>
-    <button class="detect-tab upload"      id="tabUpload" onclick="switchDetectMode('upload')">🖼️ Upload Gambar</button>
-  </div>
-
-  <div class="camera-layout">
-    <!-- Left: camera or upload -->
-    <div>
-      <!-- Camera Mode -->
-      <div id="camSection">
-        <div class="camera-box" id="cameraBox">
-          <video id="video" autoplay muted playsinline style="display:none"></video>
-          <div class="camera-overlay" id="camOverlay" style="display:none">
-            <div class="scan-frame">
-              <div class="scan-corner-tr"></div>
-              <div class="scan-corner-bl"></div>
-              <div class="scan-line"></div>
+    <div class="camera-layout">
+      <!-- Left: camera or upload -->
+      <div>
+        <!-- Camera Mode -->
+        <div id="camSection">
+          <div class="camera-box" id="cameraBox">
+            <video id="video" autoplay muted playsinline style="display:none"></video>
+            <div class="camera-overlay" id="camOverlay" style="display:none">
+              <div class="scan-frame">
+                <div class="scan-corner-tr"></div>
+                <div class="scan-corner-bl"></div>
+                <div class="scan-line"></div>
+              </div>
+              <div class="camera-status" id="cameraStatus">Arahkan huruf ke dalam kotak</div>
             </div>
-            <div class="camera-status" id="cameraStatus">Arahkan huruf ke dalam kotak</div>
+            <div class="no-camera-msg" id="noCameraMsg">
+              <span class="icon">📷</span>
+              <p style="font-size:1.1rem">Kamera belum aktif</p>
+              <p style="font-size:13px;color:#9CA3AF;margin-top:6px">Klik tombol di bawah untuk mulai</p>
+            </div>
+            <canvas id="canvas"></canvas>
           </div>
-          <div class="no-camera-msg" id="noCameraMsg">
-            <span class="icon">📷</span>
-            <p style="font-size:1.1rem">Kamera belum aktif</p>
-            <p style="font-size:13px;color:#9CA3AF;margin-top:6px">Klik tombol di bawah untuk mulai</p>
+
+          <div class="camera-controls" style="margin-top:1rem">
+            <button class="btn btn-primary" id="btnStartCam" onclick="startCamera()">📷 Aktifkan Kamera</button>
+            <button class="btn btn-secondary" id="btnCapture" onclick="captureAndDetect()" style="display:none">🔍
+              Deteksi Huruf</button>
+            <button class="btn btn-accent" id="btnAutoDetect" onclick="toggleAutoDetect()" style="display:none">▶️ Auto
+              Deteksi</button>
+            <button class="btn btn-sm" id="btnFlip" onclick="flipCamera()"
+              style="display:none;background:#EDF2F7;color:#4A5568">🔄 Balik Kamera</button>
+            <button class="btn btn-sm" onclick="showPage('video')" style="background:#EDF2F7;color:#4A5568">✏️ Belajar
+              Menulis</button>
           </div>
-          <canvas id="canvas"></canvas>
-        </div>
 
-        <div class="camera-controls" style="margin-top:1rem">
-          <button class="btn btn-primary"   id="btnStartCam"   onclick="startCamera()">📷 Aktifkan Kamera</button>
-          <button class="btn btn-secondary" id="btnCapture"    onclick="captureAndDetect()" style="display:none">🔍 Deteksi Huruf</button>
-          <button class="btn btn-accent"    id="btnAutoDetect" onclick="toggleAutoDetect()"  style="display:none">▶️ Auto Deteksi</button>
-          <button class="btn btn-sm"        id="btnFlip"       onclick="flipCamera()"        style="display:none;background:#EDF2F7;color:#4A5568">🔄 Balik Kamera</button>
-          <button class="btn btn-sm" onclick="showPage('video')" style="background:#EDF2F7;color:#4A5568">✏️ Belajar Menulis</button>
-        </div>
-
-        <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
-          <div style="background:#EFF6FF;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#1D4ED8;flex:1;min-width:160px">💡 Tulis huruf besar di kertas putih</div>
-          <div style="background:#F0FFF4;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#065F46;flex:1;min-width:160px">☀️ Pastikan cahaya cukup terang</div>
-          <div style="background:#FFF7ED;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#C2410C;flex:1;min-width:160px">📐 Posisikan huruf di tengah kotak</div>
-        </div>
-      </div>
-
-      <!-- Upload Mode -->
-      <div id="uploadSection" style="display:none">
-        <div class="upload-zone" id="dropZone"
-          onclick="document.getElementById('fileInput').click()"
-          ondragover="handleDragOver(event)"
-          ondragleave="handleDragLeave(event)"
-          ondrop="handleDrop(event)">
-          <span class="upload-icon">🖼️</span>
-          <h3>Seret &amp; Lepas Gambar</h3>
-          <p>atau klik untuk memilih file</p>
-          <div class="upload-hint">PNG, JPG, JPEG • Maks 10MB</div>
-        </div>
-        <input type="file" id="fileInput" accept="image/*" onchange="handleFileSelect(event)">
-
-        <div class="preview-box" id="previewBox">
-          <img id="previewImg" src="" alt="Preview">
-          <div class="preview-actions">
-            <button class="preview-pill" onclick="detectUploadedImage()">🔍 Deteksi AI</button>
-            <button class="preview-pill" onclick="resetUpload()">✕ Ganti</button>
+          <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
+            <div
+              style="background:#EFF6FF;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#1D4ED8;flex:1;min-width:160px">
+              💡 Tulis huruf besar di kertas putih</div>
+            <div
+              style="background:#F0FFF4;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#065F46;flex:1;min-width:160px">
+              ☀️ Pastikan cahaya cukup terang</div>
+            <div
+              style="background:#FFF7ED;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#C2410C;flex:1;min-width:160px">
+              📐 Posisikan huruf di tengah kotak</div>
           </div>
-          <div class="camera-status" id="uploadStatus" style="display:none">Menganalisis...</div>
         </div>
 
-        <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
-          <div style="background:#EFF6FF;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#1D4ED8;flex:1;min-width:160px">📸 Upload foto tulisan huruf</div>
-          <div style="background:#F0FFF4;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#065F46;flex:1;min-width:160px">🎨 Gambar dengan spidol tebal</div>
-          <div style="background:#FFF7ED;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#C2410C;flex:1;min-width:160px">🖊️ Gunakan kertas putih bersih</div>
-        </div>
-      </div>
-
-      <!-- AlphaBot Feedback -->
-      <div class="ai-feedback-box" id="cameraFeedback" style="display:none">
-        <div class="fb-title">🤖 AlphaBot:</div>
-        <div class="fb-text" id="cameraFeedbackText">Siap mendeteksi hurufmu!</div>
-      </div>
-
-      <!-- Detection History -->
-      <div id="historySection" style="display:none;margin-top:1rem;background:white;border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)">
-        <div style="font-weight:800;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:8px">
-          🕐 Riwayat Deteksi
-          <button onclick="clearHistory()" style="margin-left:auto;font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;font-weight:700">Hapus</button>
-        </div>
-        <div class="history-strip" id="historyStrip"></div>
-      </div>
-    </div>
-
-    <!-- Right: Result Panel -->
-    <div class="result-panel">
-      <div class="result-card">
-        <div style="font-size:12px;font-weight:800;color:var(--muted);letter-spacing:1px;margin-bottom:8px">HURUF TERDETEKSI</div>
-        <div class="result-letter" id="detectedLetter">?</div>
-        <div id="detectedWord" style="font-size:1.1rem;color:var(--text);font-weight:800;margin-bottom:8px"></div>
-        <div class="result-confidence">
-          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-            <span>Keyakinan AI</span>
-            <span id="confidenceText" style="color:var(--primary)">—</span>
+        <!-- Upload Mode -->
+        <div id="uploadSection" style="display:none">
+          <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileInput').click()"
+            ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+            <span class="upload-icon">🖼️</span>
+            <h3>Seret &amp; Lepas Gambar</h3>
+            <p>atau klik untuk memilih file</p>
+            <div class="upload-hint">PNG, JPG, JPEG • Maks 10MB</div>
           </div>
-          <div class="confidence-bar"><div class="confidence-fill" id="confFill" style="width:0%"></div></div>
+          <input type="file" id="fileInput" accept="image/*" onchange="handleFileSelect(event)">
+
+          <div class="preview-box" id="previewBox">
+            <img id="previewImg" src="" alt="Preview">
+            <div class="preview-actions">
+              <button class="preview-pill" onclick="detectUploadedImage()">🔍 Deteksi AI</button>
+              <button class="preview-pill" onclick="resetUpload()">✕ Ganti</button>
+            </div>
+            <div class="camera-status" id="uploadStatus" style="display:none">Menganalisis...</div>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
+            <div
+              style="background:#EFF6FF;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#1D4ED8;flex:1;min-width:160px">
+              📸 Upload foto tulisan huruf</div>
+            <div
+              style="background:#F0FFF4;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#065F46;flex:1;min-width:160px">
+              🎨 Gambar dengan spidol tebal</div>
+            <div
+              style="background:#FFF7ED;border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:#C2410C;flex:1;min-width:160px">
+              🖊️ Gunakan kertas putih bersih</div>
+          </div>
         </div>
-        <div id="resultSource" style="font-size:12px;color:var(--muted);font-weight:700;margin-top:6px"></div>
-        <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm"   id="btnLearnLetter" onclick="learnThisLetter()" style="display:none">✏️ Pelajari Huruf Ini</button>
-          <button class="btn btn-secondary btn-sm" id="btnDetectAgain" onclick="detectAgain()"     style="display:none">🔄 Deteksi Lagi</button>
-        </div>
-      </div>
 
-      <div id="alternativesCard" style="display:none;background:white;border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)">
-        <div style="font-weight:800;font-size:14px;margin-bottom:10px">🎯 Kemungkinan Lain</div>
-        <div id="alternativesList" style="display:flex;flex-direction:column;gap:6px"></div>
-      </div>
-
-      <div style="background:white;border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)">
-        <div style="font-weight:800;font-size:14px;margin-bottom:8px">📊 Huruf Sudah Dideteksi</div>
-        <div class="alphabet-grid" id="camAlphabetGrid" style="padding:0;box-shadow:none;gap:4px"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════ LEARN PAGE ══════════════ -->
-<div class="page" id="page-video">
-  <h2 class="section-title">✏️ Belajar Cara Menulis Huruf</h2>
-  <p class="section-subtitle">Pilih huruf, ikuti langkah-langkahnya, dan latihan menulis langsung!</p>
-
-  <div class="letter-selector" id="letterSelector"></div>
-
-  <div class="video-area">
-    <div>
-      <div class="letter-display-big">
-        <div class="letter-main"  id="letterMainDisplay">A</div>
-        <div class="letter-lower" id="letterLowerDisplay">a</div>
-        <div class="letter-word"  id="letterWordDisplay">🍎 Apel</div>
-      </div>
-      <div style="margin-top:1rem">
-        <div style="font-weight:800;font-size:14px;margin-bottom:6px;color:var(--muted)">✍️ Area Latihan Menulis</div>
-        <canvas id="drawCanvas" class="canvas-draw" width="600" height="220"></canvas>
-        <div class="draw-controls">
-          <button class="btn btn-primary btn-sm"   onclick="clearCanvas()">🗑️ Hapus</button>
-          <button class="btn btn-secondary btn-sm" onclick="analyzeDrawing()">🤖 Analisis AI</button>
-          <button class="btn btn-accent btn-sm"    onclick="showNextStroke()">▶️ Tunjukkan Goresan</button>
-          <select id="penSize" style="border-radius:50px;padding:6px 12px;border:2px solid #EDF2F7;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px">
-            <option value="4">Tipis</option>
-            <option value="8" selected>Normal</option>
-            <option value="14">Tebal</option>
-          </select>
-        </div>
-        <div class="ai-feedback-box" id="drawFeedback">
+        <!-- AlphaBot Feedback -->
+        <div class="ai-feedback-box" id="cameraFeedback" style="display:none">
           <div class="fb-title">🤖 AlphaBot:</div>
-          <div class="fb-text" id="drawFeedbackText">Selamat datang! Pilih huruf dan mulai latihan. Klik "Analisis AI" setelah kamu menggambar.</div>
+          <div class="fb-text" id="cameraFeedbackText">Siap mendeteksi hurufmu!</div>
+        </div>
+
+        <!-- Detection History -->
+        <div id="historySection"
+          style="display:none;margin-top:1rem;background:white;border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)">
+          <div style="font-weight:800;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:8px">
+            🕐 Riwayat Deteksi
+            <button onclick="clearHistory()"
+              style="margin-left:auto;font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;font-weight:700">Hapus</button>
+          </div>
+          <div class="history-strip" id="historyStrip"></div>
+        </div>
+      </div>
+
+      <!-- Right: Result Panel -->
+      <div class="result-panel">
+        <div class="result-card">
+          <div style="font-size:12px;font-weight:800;color:var(--muted);letter-spacing:1px;margin-bottom:8px">HURUF
+            TERDETEKSI</div>
+          <div class="result-letter" id="detectedLetter">?</div>
+          <div id="detectedWord" style="font-size:1.1rem;color:var(--text);font-weight:800;margin-bottom:8px"></div>
+          <div class="result-confidence">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+              <span>Keyakinan AI</span>
+              <span id="confidenceText" style="color:var(--primary)">—</span>
+            </div>
+            <div class="confidence-bar">
+              <div class="confidence-fill" id="confFill" style="width:0%"></div>
+            </div>
+          </div>
+          <div id="resultSource" style="font-size:12px;color:var(--muted);font-weight:700;margin-top:6px"></div>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+            <button class="btn btn-primary btn-sm" id="btnLearnLetter" onclick="learnThisLetter()"
+              style="display:none">✏️ Pelajari Huruf Ini</button>
+            <button class="btn btn-secondary btn-sm" id="btnDetectAgain" onclick="detectAgain()" style="display:none">🔄
+              Deteksi Lagi</button>
+          </div>
+        </div>
+
+        <div id="alternativesCard"
+          style="display:none;background:white;border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)">
+          <div style="font-weight:800;font-size:14px;margin-bottom:10px">🎯 Kemungkinan Lain</div>
+          <div id="alternativesList" style="display:flex;flex-direction:column;gap:6px"></div>
+        </div>
+
+        <div style="background:white;border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)">
+          <div style="font-weight:800;font-size:14px;margin-bottom:8px">📊 Huruf Sudah Dideteksi</div>
+          <div class="alphabet-grid" id="camAlphabetGrid" style="padding:0;box-shadow:none;gap:4px"></div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div>
-      <div class="stroke-guide">
-        <h3>📝 Langkah Menulis Huruf <span id="guideLetterLabel">A</span></h3>
-        <div id="strokeSteps"></div>
-        <div style="margin-top:1rem;padding:12px;background:#EFF6FF;border-radius:12px">
-          <div style="font-weight:800;font-size:13px;color:#1E40AF;margin-bottom:4px">💡 Tips AlphaBot:</div>
-          <div style="font-size:13px;color:#1D4ED8;font-weight:600" id="alphaBotTip">Mulai dari atas dan turun perlahan!</div>
+  <!-- ══════════════ LEARN PAGE ══════════════ -->
+  <div class="page" id="page-video">
+    <h2 class="section-title">✏️ Belajar Cara Menulis Huruf</h2>
+    <p class="section-subtitle">Pilih huruf, ikuti langkah-langkahnya, dan latihan menulis langsung!</p>
+
+    <div class="letter-selector" id="letterSelector"></div>
+
+    <div class="video-area">
+      <div>
+        <div class="letter-display-big">
+          <div class="letter-main" id="letterMainDisplay">A</div>
+          <div class="letter-lower" id="letterLowerDisplay">a</div>
+          <div class="letter-word" id="letterWordDisplay">🍎 Apel</div>
         </div>
-        <button class="btn btn-primary btn-sm" style="width:100%;margin-top:1rem;justify-content:center" onclick="animateLetter()">🎬 Animasi Penulisan</button>
-        <button class="btn btn-accent btn-sm"  style="width:100%;margin-top:8px;justify-content:center"  onclick="showPage('quiz')">🎮 Mulai Kuis</button>
+        <div style="margin-top:1rem">
+          <div style="font-weight:800;font-size:14px;margin-bottom:6px;color:var(--muted)">✍️ Area Latihan Menulis</div>
+          <canvas id="drawCanvas" class="canvas-draw" width="600" height="220"></canvas>
+          <div class="draw-controls">
+            <button class="btn btn-primary btn-sm" onclick="clearCanvas()">🗑️ Hapus</button>
+            <button class="btn btn-secondary btn-sm" onclick="analyzeDrawing()">🤖 Analisis AI</button>
+            <button class="btn btn-accent btn-sm" onclick="showNextStroke()">▶️ Tunjukkan Goresan</button>
+            <select id="penSize"
+              style="border-radius:50px;padding:6px 12px;border:2px solid #EDF2F7;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px">
+              <option value="4">Tipis</option>
+              <option value="8" selected>Normal</option>
+              <option value="14">Tebal</option>
+            </select>
+          </div>
+          <div class="ai-feedback-box" id="drawFeedback">
+            <div class="fb-title">🤖 AlphaBot:</div>
+            <div class="fb-text" id="drawFeedbackText">Selamat datang! Pilih huruf dan mulai latihan. Klik "Analisis AI"
+              setelah kamu menggambar.</div>
+          </div>
+        </div>
       </div>
 
-      <div style="background:white;border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);margin-top:1rem">
-        <div style="font-weight:800;font-size:14px;margin-bottom:8px">🗺️ Navigasi Cepat</div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap">
-          <button class="btn btn-sm" style="background:#EDF2F7;color:#4A5568" onclick="prevLetter()">← Sebelum</button>
-          <button class="btn btn-sm" style="background:#EDF2F7;color:#4A5568" onclick="nextLetter()">Selanjut →</button>
+      <div>
+        <div class="stroke-guide">
+          <h3>📝 Langkah Menulis Huruf <span id="guideLetterLabel">A</span></h3>
+          <div id="strokeSteps"></div>
+          <div style="margin-top:1rem;padding:12px;background:#EFF6FF;border-radius:12px">
+            <div style="font-weight:800;font-size:13px;color:#1E40AF;margin-bottom:4px">💡 Tips AlphaBot:</div>
+            <div style="font-size:13px;color:#1D4ED8;font-weight:600" id="alphaBotTip">Mulai dari atas dan turun
+              perlahan!</div>
+          </div>
+          <button class="btn btn-primary btn-sm" style="width:100%;margin-top:1rem;justify-content:center"
+            onclick="animateLetter()">🎬 Animasi Penulisan</button>
+          <button class="btn btn-accent btn-sm" style="width:100%;margin-top:8px;justify-content:center"
+            onclick="showPage('quiz')">🎮 Mulai Kuis</button>
+        </div>
+
+        <div style="background:white;border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);margin-top:1rem">
+          <div style="font-weight:800;font-size:14px;margin-bottom:8px">🗺️ Navigasi Cepat</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="btn btn-sm" style="background:#EDF2F7;color:#4A5568" onclick="prevLetter()">←
+              Sebelum</button>
+            <button class="btn btn-sm" style="background:#EDF2F7;color:#4A5568" onclick="nextLetter()">Selanjut
+              →</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ══════════════ QUIZ PAGE ══════════════ -->
-<div class="page" id="page-quiz">
-  <div id="quizSetup">
-    <h2 class="section-title">🎮 Kuis Menulis Alfabet</h2>
-    <p class="section-subtitle">Pilih jenis kuis yang ingin kamu mainkan!</p>
-    <div class="quiz-type-selector">
-      <div class="qtype-btn selected" onclick="selectQuizType('pilihan')" id="qt-pilihan"><span class="qtype-icon">🎯</span><div class="qtype-name">Pilihan Ganda</div><div class="qtype-desc">Pilih huruf yang benar</div></div>
-      <div class="qtype-btn" onclick="selectQuizType('menulis')"  id="qt-menulis"> <span class="qtype-icon">✍️</span><div class="qtype-name">Menulis Huruf</div><div class="qtype-desc">Tulis huruf di kanvas</div></div>
-      <div class="qtype-btn" onclick="selectQuizType('tebak')"   id="qt-tebak">   <span class="qtype-icon">🔤</span><div class="qtype-name">Tebak Huruf</div><div class="qtype-desc">Dari kata, tebak huruf pertama</div></div>
-      <div class="qtype-btn" onclick="selectQuizType('campur')"  id="qt-campur">  <span class="qtype-icon">🎲</span><div class="qtype-name">Acak Semua</div><div class="qtype-desc">Semua jenis soal dicampur</div></div>
-    </div>
-    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem">
-      <span style="font-weight:700;color:var(--muted)">Jumlah soal:</span>
-      <button class="btn btn-sm" style="background:#EDF2F7;color:#4A5568" id="q5"  onclick="setQCount(5)">5 Soal</button>
-      <button class="btn btn-sm btn-primary"                               id="q10" onclick="setQCount(10)">10 Soal</button>
-      <button class="btn btn-sm" style="background:#EDF2F7;color:#4A5568" id="q26" onclick="setQCount(26)">Semua (26)</button>
-    </div>
-    <button class="btn btn-primary" onclick="startQuiz()" style="font-size:1.1rem;padding:14px 32px">🚀 Mulai Kuis!</button>
-  </div>
-
-  <div id="quizGame" style="display:none">
-    <div class="quiz-header">
-      <div class="quiz-progress-wrap">
-        <div style="font-size:13px;color:var(--muted);font-weight:700;margin-bottom:4px">Soal <span id="qNum">1</span> dari <span id="qTotal">10</span></div>
-        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgFill" style="width:0%"></div></div>
+  <!-- ══════════════ QUIZ PAGE ══════════════ -->
+  <div class="page" id="page-quiz">
+    <div id="quizSetup">
+      <h2 class="section-title">🎮 Kuis Menulis Alfabet</h2>
+      <p class="section-subtitle">Pilih jenis kuis yang ingin kamu mainkan!</p>
+      <div class="quiz-type-selector">
+        <div class="qtype-btn selected" onclick="selectQuizType('pilihan')" id="qt-pilihan"><span
+            class="qtype-icon">🎯</span>
+          <div class="qtype-name">Pilihan Ganda</div>
+          <div class="qtype-desc">Pilih huruf yang benar</div>
+        </div>
+        <div class="qtype-btn" onclick="selectQuizType('menulis')" id="qt-menulis"> <span class="qtype-icon">✍️</span>
+          <div class="qtype-name">Menulis Huruf</div>
+          <div class="qtype-desc">Tulis huruf di kanvas</div>
+        </div>
+        <div class="qtype-btn" onclick="selectQuizType('tebak')" id="qt-tebak"> <span class="qtype-icon">🔤</span>
+          <div class="qtype-name">Tebak Huruf</div>
+          <div class="qtype-desc">Dari kata, tebak huruf pertama</div>
+        </div>
+        <div class="qtype-btn" onclick="selectQuizType('campur')" id="qt-campur"> <span class="qtype-icon">🎲</span>
+          <div class="qtype-name">Acak Semua</div>
+          <div class="qtype-desc">Semua jenis soal dicampur</div>
+        </div>
       </div>
-      <div class="quiz-stats">
-        <div class="quiz-stat"><span class="num" id="qScore"  style="color:var(--green)">0</span>  <span class="lbl">Benar</span></div>
-        <div class="quiz-stat"><span class="num" id="qWrong"  style="color:var(--primary)">0</span> <span class="lbl">Salah</span></div>
-        <div class="quiz-stat"><span class="num" id="qStreak" style="color:#D97706">0</span>        <span class="lbl">Streak 🔥</span></div>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem">
+        <span style="font-weight:700;color:var(--muted)">Jumlah soal:</span>
+        <button class="btn btn-sm" style="background:#EDF2F7;color:#4A5568" id="q5" onclick="setQCount(5)">5
+          Soal</button>
+        <button class="btn btn-sm btn-primary" id="q10" onclick="setQCount(10)">10 Soal</button>
+        <button class="btn btn-sm" style="background:#EDF2F7;color:#4A5568" id="q26" onclick="setQCount(26)">Semua
+          (26)</button>
+      </div>
+      <button class="btn btn-primary" onclick="startQuiz()" style="font-size:1.1rem;padding:14px 32px">🚀 Mulai
+        Kuis!</button>
+    </div>
+
+    <div id="quizGame" style="display:none">
+      <div class="quiz-header">
+        <div class="quiz-progress-wrap">
+          <div style="font-size:13px;color:var(--muted);font-weight:700;margin-bottom:4px">Soal <span id="qNum">1</span>
+            dari <span id="qTotal">10</span></div>
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="quizProgFill" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="quiz-stats">
+          <div class="quiz-stat"><span class="num" id="qScore" style="color:var(--green)">0</span> <span
+              class="lbl">Benar</span></div>
+          <div class="quiz-stat"><span class="num" id="qWrong" style="color:var(--primary)">0</span> <span
+              class="lbl">Salah</span></div>
+          <div class="quiz-stat"><span class="num" id="qStreak" style="color:#D97706">0</span> <span class="lbl">Streak
+              🔥</span></div>
+        </div>
+      </div>
+      <div id="quizContent"></div>
+      <div style="text-align:center;margin-top:1rem">
+        <button class="btn" style="background:#EDF2F7;color:#4A5568" onclick="skipQuestion()">⏭️ Lewati</button>
+        <button class="btn btn-primary" id="btnNextQ" style="display:none" onclick="nextQuestion()">Soal Berikut
+          →</button>
       </div>
     </div>
-    <div id="quizContent"></div>
-    <div style="text-align:center;margin-top:1rem">
-      <button class="btn" style="background:#EDF2F7;color:#4A5568" onclick="skipQuestion()">⏭️ Lewati</button>
-      <button class="btn btn-primary" id="btnNextQ" style="display:none" onclick="nextQuestion()">Soal Berikut →</button>
-    </div>
-  </div>
 
-  <div id="quizResult" style="display:none">
-    <div class="quiz-result-screen">
-      <span class="trophy" id="resultTrophy">🏆</span>
-      <h2 id="resultTitle">Luar Biasa!</h2>
-      <p id="resultSubtitle">Kamu berhasil menjawab dengan benar!</p>
-      <div class="score-circle"><span class="score-num" id="finalScore">0</span><span class="score-lbl">Skor</span></div>
-      <div id="resultStars" style="font-size:2.5rem;margin-bottom:1.5rem"></div>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-primary"   onclick="startQuiz()">🔄 Main Lagi</button>
-        <button class="btn btn-secondary" onclick="showPage('video')">✏️ Belajar Lagi</button>
-        <button class="btn btn-accent"    onclick="showPage('progress')">⭐ Lihat Progress</button>
+    <div id="quizResult" style="display:none">
+      <div class="quiz-result-screen">
+        <span class="trophy" id="resultTrophy">🏆</span>
+        <h2 id="resultTitle">Luar Biasa!</h2>
+        <p id="resultSubtitle">Kamu berhasil menjawab dengan benar!</p>
+        <div class="score-circle"><span class="score-num" id="finalScore">0</span><span class="score-lbl">Skor</span>
+        </div>
+        <div id="resultStars" style="font-size:2.5rem;margin-bottom:1.5rem"></div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="startQuiz()">🔄 Main Lagi</button>
+          <button class="btn btn-secondary" onclick="showPage('video')">✏️ Belajar Lagi</button>
+          <button class="btn btn-accent" onclick="showPage('progress')">⭐ Lihat Progress</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ══════════════ PROGRESS PAGE ══════════════ -->
-<div class="page" id="page-progress">
-  <h2 class="section-title">⭐ Progress Belajarku</h2>
-  <p class="section-subtitle">Lihat perkembangan belajar kamu!</p>
+  <!-- ══════════════ PROGRESS PAGE ══════════════ -->
+  <div class="page" id="page-progress">
+    <h2 class="section-title">⭐ Progress Belajarku</h2>
+    <p class="section-subtitle">Lihat perkembangan belajar kamu!</p>
 
-  <div class="progress-grid">
-    <div class="stat-big"><span class="stat-icon">🔤</span><div class="stat-val" id="progLettersLearned">0</div><div class="stat-label">Huruf Dipelajari</div></div>
-    <div class="stat-big"><span class="stat-icon">🎮</span><div class="stat-val" id="progQuizDone">0</div><div class="stat-label">Kuis Diselesaikan</div></div>
-    <div class="stat-big"><span class="stat-icon">⭐</span><div class="stat-val" id="progTotalScore">0</div><div class="stat-label">Total Poin</div></div>
-    <div class="stat-big"><span class="stat-icon">🔥</span><div class="stat-val" id="progBestStreak">0</div><div class="stat-label">Streak Terbaik</div></div>
+    <div class="progress-grid">
+      <div class="stat-big"><span class="stat-icon">🔤</span>
+        <div class="stat-val" id="progLettersLearned">0</div>
+        <div class="stat-label">Huruf Dipelajari</div>
+      </div>
+      <div class="stat-big"><span class="stat-icon">🎮</span>
+        <div class="stat-val" id="progQuizDone">0</div>
+        <div class="stat-label">Kuis Diselesaikan</div>
+      </div>
+      <div class="stat-big"><span class="stat-icon">⭐</span>
+        <div class="stat-val" id="progTotalScore">0</div>
+        <div class="stat-label">Total Poin</div>
+      </div>
+      <div class="stat-big"><span class="stat-icon">🔥</span>
+        <div class="stat-val" id="progBestStreak">0</div>
+        <div class="stat-label">Streak Terbaik</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Fredoka One',cursive;font-size:1.4rem;margin-bottom:1rem">🗺️ Peta Huruf Alfabet</h3>
+    <div class="alphabet-progress-grid" id="alphabetProgressGrid"></div>
+
+    <div style="margin-top:1.5rem;background:white;border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow)">
+      <h3 style="font-family:'Fredoka One',cursive;font-size:1.4rem;margin-bottom:1rem">🏅 Lencana Pencapaian</h3>
+      <div id="badgesGrid" style="display:flex;gap:12px;flex-wrap:wrap"></div>
+    </div>
+
+    <div style="margin-top:1rem;text-align:center">
+      <button class="btn" style="background:#FEE2E2;color:#991B1B" onclick="resetProgress()">🗑️ Reset Progress</button>
+    </div>
   </div>
 
-  <h3 style="font-family:'Fredoka One',cursive;font-size:1.4rem;margin-bottom:1rem">🗺️ Peta Huruf Alfabet</h3>
-  <div class="alphabet-progress-grid" id="alphabetProgressGrid"></div>
+  <!-- ══════════════ SCRIPTS (order matters!) ══════════════ -->
+  <!-- Teachable Machine & TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
-  <div style="margin-top:1.5rem;background:white;border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow)">
-    <h3 style="font-family:'Fredoka One',cursive;font-size:1.4rem;margin-bottom:1rem">🏅 Lencana Pencapaian</h3>
-    <div id="badgesGrid" style="display:flex;gap:12px;flex-wrap:wrap"></div>
-  </div>
+  <script src="src/js/data.js"></script>
+  <script src="src/js/storage.js"></script>
+  <script src="src/js/ui.js"></script>
+  <script src="src/js/detect.js"></script>
+  <script src="src/js/learn.js"></script>
+  <script src="src/js/quiz.js"></script>
+  <script src="src/js/progress.js"></script>
 
-  <div style="margin-top:1rem;text-align:center">
-    <button class="btn" style="background:#FEE2E2;color:#991B1B" onclick="resetProgress()">🗑️ Reset Progress</button>
-  </div>
-</div>
-
-<!-- ══════════════ SCRIPTS (order matters!) ══════════════ -->
-<script src="src/js/data.js"></script>
-<script src="src/js/storage.js"></script>
-<script src="src/js/ui.js"></script>
-<script src="src/js/detect.js"></script>
-<script src="src/js/learn.js"></script>
-<script src="src/js/quiz.js"></script>
-<script src="src/js/progress.js"></script>
-
-<script>
-  // ── Bootstrap ──
-  function init() {
-    buildAlphabetGrid('homeAlphabetGrid', true);
-    buildAlphabetGrid('camAlphabetGrid', false);
-    renderLetterSelector();
-    selectLetter('A');
-    setTimeout(initDrawCanvas, 100);
-  }
-  window.addEventListener('load', init);
-</script>
+  <script>
+    // ── Bootstrap ──
+    function init() {
+      buildAlphabetGrid('homeAlphabetGrid', true);
+      buildAlphabetGrid('camAlphabetGrid', false);
+      renderLetterSelector();
+      selectLetter('A');
+      setTimeout(initDrawCanvas, 100);
+    }
+    window.addEventListener('load', init);
+  </script>
 </body>
+
 </html>

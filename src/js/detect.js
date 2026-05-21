@@ -150,62 +150,69 @@ function detectAgain() {
 }
 
 /* ══════════════════════════════
-   SHARED — Anthropic API call
+   SHARED — Teachable Machine Image Model call
 ══════════════════════════════ */
+let tmModel;
+const URL = "https://teachablemachine.withgoogle.com/models/asjLB8k2r/";
+
+async function initTMModel() {
+  if (tmModel) return tmModel;
+  const modelURL = URL + "model.json";
+  const metadataURL = URL + "metadata.json";
+  tmModel = await tmImage.load(modelURL, metadataURL);
+  return tmModel;
+}
+
 async function runDetection(base64img, source) {
   setResultLoading();
   document.getElementById('cameraFeedback').style.display = 'block';
   document.getElementById('cameraFeedbackText').innerHTML =
-    '<div class="typing-dots"><span></span><span></span><span></span></div> AlphaBot sedang melihat tulisanmu...';
+    '<div class="typing-dots"><span></span><span></span><span></span></div> Memuat model AI...';
 
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 300,
-        messages: [{
-          role: 'user',
-          content: [
-            { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: base64img } },
-            {
-              type: 'text', text:
-                `Kamu adalah sistem pendeteksi huruf alfabet A-Z untuk anak PAUD/TK.
-Fokus HANYA pada huruf kapital yang ditulis tangan di kertas putih.
+    await initTMModel();
+    document.getElementById('cameraFeedbackText').innerHTML =
+      '<div class="typing-dots"><span></span><span></span><span></span></div> Mendeteksi tulisanmu...';
 
-PANDUAN BENTUK HURUF:
-- Dua garis miring bertemu di atas + garis tengah = A
-- Garis lurus + dua benjolan ke kanan = B
-- Lengkungan ke kiri = C
-- Garis lurus + lengkungan besar ke kanan = D
-- Garis lurus + tiga garis mendatar = E
-- Abaikan background gelap, fokus pada bentuk huruf saja
-- Jika ada area hitam di pinggir foto, itu bukan bagian dari huruf
+    // Buat image element dari base64
+    const img = new Image();
+    img.src = 'data:image/jpeg;base64,' + base64img;
+    await new Promise(resolve => img.onload = resolve);
 
-Balas HANYA JSON (tanpa markdown):
-{"letter":"A","confidence":88,"alternatives":[{"letter":"H","confidence":7},{"letter":"V","confidence":5}],"message":"Pesan menyemangati bahasa Indonesia untuk anak PAUD pakai emoji maks 1 kalimat","quality":"baik"}
+    // Prediksi dengan Teachable Machine
+    const predictions = await tmModel.predict(img);
 
-Aturan:
-- letter: huruf kapital A-Z yang paling mungkin, atau "?" jika tidak terlihat
-- confidence: nilai JUJUR 0-100, jangan dibuat tinggi jika tidak yakin
-- quality: "baik" jika huruf jelas, "cukup" jika agak jelas, "kurang" jika tidak jelas
-- Jika background gelap/hitam mendominasi: tetap fokus pada huruf di tengah` }
-          ]
-        }]
-      })
-    });
-    const data = await resp.json();
-    const raw = data.content.map(c => c.text || '').join('').replace(/```json|```/g, '').trim();
-    const result = JSON.parse(raw);
-    showDetectionResult(result.letter, result.confidence, result.message, result.alternatives || [], source, result.quality);
+    // Urutkan prediksi berdasarkan probabilitas tertinggi
+    predictions.sort((a, b) => b.probability - a.probability);
+
+    const bestPred = predictions[0];
+    const letter = bestPred.className; // Biasanya labelnya adalah huruf
+    const confidence = Math.round(bestPred.probability * 100);
+
+    const alternatives = predictions.slice(1, 3).map(p => ({
+      letter: p.className,
+      confidence: Math.round(p.probability * 100)
+    }));
+
+    let quality = 'baik';
+    if (confidence < 50) quality = 'kurang';
+    else if (confidence < 75) quality = 'cukup';
+
+    // Pesan menyemangati acak
+    const messages = [
+      `Hebat! Bentuk huruf ${letter} mu sangat bagus! 🌟`,
+      `Pintar sekali! Itu mirip huruf ${letter}! 🎉`,
+      `Wah, AlphaBot yakin ini huruf ${letter}! Terus semangat! 🚀`
+    ];
+    const message = messages[Math.floor(Math.random() * messages.length)];
+
+    showDetectionResult(letter, confidence, message, alternatives, source, quality);
+
   } catch (e) {
-    // Graceful fallback when API is unavailable
-    const detected = ALPHABET[Math.floor(Math.random() * 26)];
-    const conf = 55 + Math.floor(Math.random() * 40);
-    const alts = ALPHABET.filter(l => l !== detected).sort(() => Math.random() - 0.5).slice(0, 2)
-      .map((l, i) => ({ letter: l, confidence: Math.max(5, 20 - i * 8) }));
-    showDetectionResult(detected, conf, `Wah, kamu menulis huruf ${detected} dengan berani! Terus semangat ya! 🌟`, alts, source, 'cukup');
+    console.error(e);
+    // Fallback error
+    const detected = '?';
+    showDetectionResult(detected, 0, `Oops, ada masalah saat mendeteksi. Coba lagi ya!`, [], source, 'kurang');
   }
 }
 
