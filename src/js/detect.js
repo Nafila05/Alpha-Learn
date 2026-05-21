@@ -2,12 +2,12 @@
 //  AlphaLearn — Camera & Upload Detection
 // ============================================
 
-let stream              = null;
-let autoDetecting       = false;
-let autoTimer           = null;
+let stream = null;
+let autoDetecting = false;
+let autoTimer = null;
 let currentDetectedLetter = null;
-let detectionHistory    = [];
-let currentFacingMode   = 'environment';
+let detectionHistory = [];
+let currentFacingMode = 'environment';
 let uploadedImageBase64 = null;
 
 /* ── Mode Switch ── */
@@ -15,8 +15,8 @@ function switchDetectMode(mode) {
   const isCamera = mode === 'camera';
   document.getElementById('tabCam').classList.toggle('active', isCamera);
   document.getElementById('tabUpload').classList.toggle('active', !isCamera);
-  document.getElementById('camSection').style.display    = isCamera ? 'block' : 'none';
-  document.getElementById('uploadSection').style.display = isCamera ? 'none'  : 'block';
+  document.getElementById('camSection').style.display = isCamera ? 'block' : 'none';
+  document.getElementById('uploadSection').style.display = isCamera ? 'none' : 'block';
 }
 
 /* ══════════════════════════════
@@ -33,11 +33,11 @@ async function startCamera() {
     video.style.display = 'block';
 
     document.getElementById('noCameraMsg').style.display = 'none';
-    document.getElementById('camOverlay').style.display  = 'block';
-    document.getElementById('btnStartCam').style.display  = 'none';
-    document.getElementById('btnCapture').style.display   = 'flex';
-    document.getElementById('btnAutoDetect').style.display= 'flex';
-    document.getElementById('btnFlip').style.display      = 'flex';
+    document.getElementById('camOverlay').style.display = 'block';
+    document.getElementById('btnStartCam').style.display = 'none';
+    document.getElementById('btnCapture').style.display = 'flex';
+    document.getElementById('btnAutoDetect').style.display = 'flex';
+    document.getElementById('btnFlip').style.display = 'flex';
     document.getElementById('cameraFeedback').style.display = 'block';
     document.getElementById('cameraFeedbackText').textContent =
       '📷 Kamera aktif! Tunjukkan tulisan hurufmu, lalu klik "Deteksi Huruf"';
@@ -53,9 +53,9 @@ async function flipCamera() {
 
 async function captureAndDetect() {
   if (!stream) { alert('Aktifkan kamera dulu!'); return; }
-  const video  = document.getElementById('video');
+  const video = document.getElementById('video');
   const canvas = document.getElementById('canvas');
-  canvas.width  = video.videoWidth  || 640;
+  canvas.width = video.videoWidth || 640;
   canvas.height = video.videoHeight || 480;
   const ctx = canvas.getContext('2d');
   ctx.save();
@@ -116,8 +116,8 @@ function loadImageFile(file) {
   reader.onload = (e) => {
     const dataUrl = e.target.result;
     uploadedImageBase64 = dataUrl.split(',')[1];
-    document.getElementById('previewImg').src  = dataUrl;
-    document.getElementById('dropZone').style.display   = 'none';
+    document.getElementById('previewImg').src = dataUrl;
+    document.getElementById('dropZone').style.display = 'none';
     document.getElementById('previewBox').style.display = 'block';
     document.getElementById('cameraFeedback').style.display = 'block';
     document.getElementById('cameraFeedbackText').textContent =
@@ -128,19 +128,19 @@ function loadImageFile(file) {
 
 function resetUpload() {
   uploadedImageBase64 = null;
-  document.getElementById('previewImg').src          = '';
+  document.getElementById('previewImg').src = '';
   document.getElementById('previewBox').style.display = 'none';
-  document.getElementById('dropZone').style.display   = 'flex';
-  document.getElementById('fileInput').value          = '';
+  document.getElementById('dropZone').style.display = 'flex';
+  document.getElementById('fileInput').value = '';
   document.getElementById('uploadStatus').style.display = 'none';
 }
 
 async function detectUploadedImage() {
   if (!uploadedImageBase64) return;
-  document.getElementById('uploadStatus').style.display  = 'block';
-  document.getElementById('uploadStatus').textContent    = '🔍 AI menganalisis...';
+  document.getElementById('uploadStatus').style.display = 'block';
+  document.getElementById('uploadStatus').textContent = '🔍 AI menganalisis...';
   await runDetection(uploadedImageBase64, 'Upload');
-  document.getElementById('uploadStatus').style.display  = 'none';
+  document.getElementById('uploadStatus').style.display = 'none';
 }
 
 function detectAgain() {
@@ -169,42 +169,51 @@ async function runDetection(base64img, source) {
           role: 'user',
           content: [
             { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: base64img } },
-            { type: 'text',  text:
-`Kamu adalah sistem pendeteksi huruf alfabet untuk anak PAUD/TK yang sangat akurat.
-Analisis gambar ini. Cari huruf alfabet (A-Z) yang ditulis tangan.
+            {
+              type: 'text', text:
+                `Kamu adalah sistem pendeteksi huruf alfabet A-Z untuk anak PAUD/TK.
+Fokus HANYA pada huruf kapital yang ditulis tangan di kertas putih.
+
+PANDUAN BENTUK HURUF:
+- Dua garis miring bertemu di atas + garis tengah = A
+- Garis lurus + dua benjolan ke kanan = B
+- Lengkungan ke kiri = C
+- Garis lurus + lengkungan besar ke kanan = D
+- Garis lurus + tiga garis mendatar = E
+- Abaikan background gelap, fokus pada bentuk huruf saja
+- Jika ada area hitam di pinggir foto, itu bukan bagian dari huruf
 
 Balas HANYA JSON (tanpa markdown):
-{"letter":"A","confidence":88,"alternatives":[{"letter":"H","confidence":7},{"letter":"V","confidence":5}],"message":"Pesan singkat menyemangati bahasa Indonesia untuk anak PAUD, pakai emoji, maks 1 kalimat","quality":"baik"}
+{"letter":"A","confidence":88,"alternatives":[{"letter":"H","confidence":7},{"letter":"V","confidence":5}],"message":"Pesan menyemangati bahasa Indonesia untuk anak PAUD pakai emoji maks 1 kalimat","quality":"baik"}
 
 Aturan:
-- letter: huruf yang paling mungkin (A-Z), atau "?" jika tidak ada
-- confidence: 0-100
-- alternatives: 2 kemungkinan lain
-- quality: "baik", "cukup", atau "kurang"
-- Jika kosong/tidak jelas: letter "?", confidence 0` }
+- letter: huruf kapital A-Z yang paling mungkin, atau "?" jika tidak terlihat
+- confidence: nilai JUJUR 0-100, jangan dibuat tinggi jika tidak yakin
+- quality: "baik" jika huruf jelas, "cukup" jika agak jelas, "kurang" jika tidak jelas
+- Jika background gelap/hitam mendominasi: tetap fokus pada huruf di tengah` }
           ]
         }]
       })
     });
-    const data   = await resp.json();
-    const raw    = data.content.map(c => c.text || '').join('').replace(/```json|```/g, '').trim();
+    const data = await resp.json();
+    const raw = data.content.map(c => c.text || '').join('').replace(/```json|```/g, '').trim();
     const result = JSON.parse(raw);
     showDetectionResult(result.letter, result.confidence, result.message, result.alternatives || [], source, result.quality);
   } catch (e) {
     // Graceful fallback when API is unavailable
     const detected = ALPHABET[Math.floor(Math.random() * 26)];
-    const conf     = 55 + Math.floor(Math.random() * 40);
-    const alts     = ALPHABET.filter(l => l !== detected).sort(() => Math.random() - 0.5).slice(0, 2)
+    const conf = 55 + Math.floor(Math.random() * 40);
+    const alts = ALPHABET.filter(l => l !== detected).sort(() => Math.random() - 0.5).slice(0, 2)
       .map((l, i) => ({ letter: l, confidence: Math.max(5, 20 - i * 8) }));
     showDetectionResult(detected, conf, `Wah, kamu menulis huruf ${detected} dengan berani! Terus semangat ya! 🌟`, alts, source, 'cukup');
   }
 }
 
 function setResultLoading() {
-  document.getElementById('detectedLetter').textContent   = '⌛';
-  document.getElementById('confidenceText').textContent   = '—';
-  document.getElementById('confFill').style.width         = '0%';
-  document.getElementById('detectedWord').textContent     = '';
+  document.getElementById('detectedLetter').textContent = '⌛';
+  document.getElementById('confidenceText').textContent = '—';
+  document.getElementById('confFill').style.width = '0%';
+  document.getElementById('detectedWord').textContent = '';
   document.getElementById('btnLearnLetter').style.display = 'none';
   document.getElementById('btnDetectAgain').style.display = 'none';
   document.getElementById('alternativesCard').style.display = 'none';
@@ -221,11 +230,11 @@ function showDetectionResult(letter, confidence, message, alternatives, source, 
 
   // Confidence bar color
   document.getElementById('confidenceText').textContent = confidence + '%';
-  document.getElementById('confFill').style.width       = confidence + '%';
-  document.getElementById('confFill').style.background  =
+  document.getElementById('confFill').style.width = confidence + '%';
+  document.getElementById('confFill').style.background =
     confidence >= 75 ? 'linear-gradient(90deg,#6EE7B7,#4ECDC4)' :
-    confidence >= 50 ? 'linear-gradient(90deg,#FFE66D,#FCA5A5)' :
-                       'linear-gradient(90deg,#FCA5A5,#FF6B6B)';
+      confidence >= 50 ? 'linear-gradient(90deg,#FFE66D,#FCA5A5)' :
+        'linear-gradient(90deg,#FCA5A5,#FF6B6B)';
 
   const qualityIcon = quality === 'baik' ? '⭐' : quality === 'cukup' ? '👍' : '💪';
   document.getElementById('resultSource').textContent =
@@ -234,7 +243,7 @@ function showDetectionResult(letter, confidence, message, alternatives, source, 
   document.getElementById('cameraFeedbackText').textContent = message || 'Terus semangat belajar!';
 
   if (letter !== '?') {
-    document.getElementById('detectedWord').textContent     = LETTER_DATA[letter]?.word || '';
+    document.getElementById('detectedWord').textContent = LETTER_DATA[letter]?.word || '';
     document.getElementById('btnLearnLetter').style.display = 'inline-flex';
     document.getElementById('btnDetectAgain').style.display = 'inline-flex';
 
@@ -285,7 +294,7 @@ function addToHistory(letter, confidence) {
 }
 
 function renderHistory() {
-  const strip   = document.getElementById('historyStrip');
+  const strip = document.getElementById('historyStrip');
   const section = document.getElementById('historySection');
   if (detectionHistory.length === 0) { section.style.display = 'none'; return; }
   section.style.display = 'block';
