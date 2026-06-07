@@ -1,153 +1,225 @@
-# 🎒 AlphaLearn — Belajar Huruf Alfabet via AI
+# AlphaLearn: AI-Powered Interactive Alphabet Learning Platform
 
-Platform belajar huruf alfabet interaktif berbasis AI untuk anak PAUD & TK.
-Anak bisa mendeteksi huruf lewat kamera, upload gambar, belajar cara menulis, dan main kuis seru!
+## Overview
 
----
+**AlphaLearn** is an interactive web-based educational platform designed to help early childhood learners (PAUD and Kindergarten students) recognize, write, and practice alphabet letters through Artificial Intelligence (AI) technology.
 
-## ✨ Fitur Utama
-
-| Fitur | Deskripsi |
-|---|---|
-| 📷 **Deteksi Kamera** | Tulis huruf di kertas → arahkan ke kamera → AI mendeteksi |
-| 🖼️ **Upload Gambar** | Upload foto tulisan tangan → AI menganalisis huruf |
-| ✏️ **Panduan Menulis** | Langkah-langkah menulis tiap huruf + kanvas latihan |
-| 🤖 **Analisis AI** | AlphaBot memberi umpan balik tulisan anak secara real-time |
-| 🎬 **Animasi Huruf** | Lihat animasi cara menulis huruf di kanvas |
-| 🎮 **Kuis Interaktif** | 3 jenis kuis: pilihan ganda, menulis, tebak kata |
-| ⭐ **Lacak Progress** | Peta huruf, poin, streak, dan 8 lencana pencapaian |
+The platform combines handwriting recognition, guided writing exercises, animated demonstrations, interactive quizzes, and learning progress tracking to create an engaging learning experience for young children.
 
 ---
 
-## 📁 Struktur Project
+## Key Features
 
-```
+### AI Letter Recognition
+
+* Detect handwritten alphabet letters through a device camera.
+* Analyze uploaded handwriting images.
+* Provide instant feedback on letter recognition results.
+
+### Interactive Writing Practice
+
+* Step-by-step guidance for writing each letter.
+* Digital canvas for practicing handwriting.
+* Animated demonstrations showing correct stroke order.
+
+### AI Learning Assistant
+
+* Real-time feedback on children's handwriting.
+* Personalized learning assistance through AlphaBot.
+* Encourages independent learning with interactive responses.
+
+### Gamified Learning Experience
+
+* Multiple quiz formats:
+
+  * Multiple Choice Quiz
+  * Letter Writing Quiz
+  * Word Guessing Quiz
+* Reward system with points and achievements.
+* Learning streaks to encourage consistent practice.
+
+### Progress Tracking
+
+* Alphabet mastery map.
+* Learning statistics dashboard.
+* Achievement badges and milestones.
+* Local progress storage for continuous learning.
+
+---
+
+## Project Structure
+
+```text
 alphalearn/
-├── index.html              # Entry point utama
+├── index.html
+├── README.md
+├── SETUP_GUIDE.md
 ├── src/
 │   ├── css/
-│   │   ├── base.css        # Reset, variabel, animasi
-│   │   ├── components.css  # Nav, button, card, chip, dll
-│   │   └── pages.css       # Style tiap halaman
+│   │   ├── base.css
+│   │   ├── components.css
+│   │   └── pages.css
+│   │
 │   └── js/
-│       ├── data.js         # Data huruf, kata, path animasi
-│       ├── storage.js      # LocalStorage & progress
-│       ├── ui.js           # Navigasi, grid, reward, confetti
-│       ├── detect.js       # Kamera + upload + AI detection
-│       ├── learn.js        # Halaman belajar & kanvas
-│       ├── quiz.js         # Sistem kuis lengkap
-│       └── progress.js     # Halaman progress & lencana
-├── .vscode/
-│   ├── settings.json       # VSCode workspace settings
-│   └── extensions.json     # Ekstensi yang direkomendasikan
+│       ├── data.js
+│       ├── storage.js
+│       ├── ui.js
+│       ├── detect.js
+│       ├── learn.js
+│       ├── quiz.js
+│       ├── progress.js
+│       └── animasi.js
+│
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml      # Auto-deploy ke GitHub Pages
-├── .gitignore
-└── README.md
+│       └── deploy.yml
+│
+├── .vscode/
+│   ├── settings.json
+│   └── extensions.json
+│
+└── .gitignore
 ```
 
 ---
 
-## 🚀 Cara Menjalankan (VSCode)
+## Technology Stack
 
-### Prasyarat
-- [Visual Studio Code](https://code.visualstudio.com/)
-- Ekstensi **Live Server** (otomatis disarankan saat buka project)
+| Technology              | Purpose                         |
+| ----------------------- | ------------------------------- |
+| HTML5                   | Application structure           |
+| CSS3                    | User interface styling          |
+| JavaScript (Vanilla JS) | Application logic               |
+| Canvas API              | Interactive handwriting canvas  |
+| MediaDevices API        | Camera access                   |
+| AI Vision API           | Letter recognition and analysis |
+| LocalStorage            | Offline progress persistence    |
+| GitHub Pages            | Deployment and hosting          |
 
-### Langkah-langkah
+---
+
+## Installation
+
+### Prerequisites
+
+* Visual Studio Code
+* Live Server Extension
+* Modern Web Browser (Chrome, Edge, Firefox)
+
+### Clone Repository
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/USERNAME/alphalearn.git
-cd alphalearn
+git clone https://github.com/Nafila05/Alpha-Learn.git
+cd Alpha-Learn
+```
 
-# 2. Buka di VSCode
+### Open Project
+
+```bash
 code .
-
-# 3. Install ekstensi Live Server jika belum ada
-#    Ctrl+Shift+X → cari "Live Server" → Install
-
-# 4. Jalankan
-#    Klik kanan index.html → "Open with Live Server"
-#    ATAU klik tombol "Go Live" di status bar bawah VSCode
 ```
 
-Browser akan otomatis terbuka di `http://127.0.0.1:5500`
+### Run Application
 
-> ⚠️ **Penting:** Harus dijalankan via Live Server (bukan buka file HTML langsung) agar kamera & API bisa berfungsi dengan benar karena butuh HTTPS/localhost.
+1. Install the **Live Server** extension in VS Code.
+2. Open `index.html`.
+3. Right-click and select **Open with Live Server**.
+
+Or click the **Go Live** button in the bottom-right corner of VS Code.
+
+The application will be available at:
+
+```text
+http://127.0.0.1:5500
+```
 
 ---
 
-## 🤖 Konfigurasi API
+## AI Integration
 
-Website ini menggunakan **Anthropic Claude API** untuk:
-- Mendeteksi huruf dari foto/kamera
-- Memberikan umpan balik tulisan anak
-- Menilai hasil kuis menulis
+AlphaLearn utilizes AI-based image analysis to:
 
-API key sudah terintegrasi via claude.ai artifacts. Jika deploy mandiri, tambahkan API key di `src/js/detect.js` dan `src/js/learn.js`:
+* Recognize handwritten alphabet letters.
+* Evaluate writing accuracy.
+* Generate educational feedback.
+* Support interactive learning activities.
 
-```js
-headers: {
-  'Content-Type': 'application/json',
-  'x-api-key': 'YOUR_ANTHROPIC_API_KEY',  // tambahkan ini
-  'anthropic-version': '2023-06-01'
-}
-```
+For production deployment, API credentials should be stored securely using:
 
-> 🔒 **Jangan commit API key ke GitHub!** Gunakan environment variable atau backend proxy untuk production.
+* Environment Variables
+* Backend Proxy Services
+* Secret Management Solutions
+
+**Never expose API keys directly in public repositories.**
 
 ---
 
-## 🌐 Deploy ke GitHub Pages
+## Deployment
 
-### Otomatis (GitHub Actions)
-Push ke branch `main` → otomatis deploy via `.github/workflows/deploy.yml`
+### GitHub Pages (Automatic)
+
+The project supports automatic deployment through GitHub Actions.
 
 ```bash
 git add .
-git commit -m "feat: initial deploy"
+git commit -m "feat: update application"
 git push origin main
 ```
 
-Akses di: `https://USERNAME.github.io/alphalearn`
+After deployment, the application can be accessed through:
 
-### Manual
-1. GitHub repo → **Settings** → **Pages**
-2. Source: **Deploy from a branch**
-3. Branch: `main` / `(root)`
-4. Save → tunggu 1-2 menit
+```text
+https://nafila05.github.io/Alpha-Learn
+```
 
----
+### Manual Deployment
 
-## 🛠️ Tech Stack
+1. Open the repository settings.
+2. Navigate to **Pages**.
+3. Select:
 
-- **HTML5** + **CSS3** + **Vanilla JavaScript** — tanpa framework, ringan & cepat
-- **Canvas API** — kanvas menggambar huruf
-- **MediaDevices API** — akses kamera
-- **Claude Vision API** — deteksi & analisis gambar
-- **LocalStorage** — simpan progress offline
-
----
-
-## 📱 Kompatibilitas
-
-| Browser | Kamera | Upload | Canvas |
-|---|---|---|---|
-| Chrome 90+ | ✅ | ✅ | ✅ |
-| Firefox 88+ | ✅ | ✅ | ✅ |
-| Safari 14+ | ✅ | ✅ | ✅ |
-| Edge 90+ | ✅ | ✅ | ✅ |
+   * Source: Deploy from a branch
+   * Branch: main
+   * Folder: /root
+4. Save the configuration.
 
 ---
 
-## 🤝 Kontribusi
+## Educational Objectives
 
-Pull request sangat diterima! Untuk perubahan besar, buka issue dulu ya.
+AlphaLearn is developed to:
+
+* Improve alphabet recognition skills.
+* Support early handwriting development.
+* Increase student engagement through gamification.
+* Provide AI-assisted learning experiences.
+* Create accessible and interactive educational technology for young learners.
 
 ---
 
-## 📄 Lisensi
+## Future Development
 
-MIT License — bebas digunakan untuk keperluan edukasi.
+Planned enhancements include:
+
+* Number recognition and writing practice.
+* Pronunciation and phonics learning.
+* Parent and teacher dashboards.
+* Cloud-based progress synchronization.
+* Multi-language support.
+* Personalized learning recommendations.
+
+---
+
+## Contributors
+
+Developed by the AlphaLearn Development Team.
+
+Contributions, suggestions, and improvements are welcome through Issues and Pull Requests.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+You are free to use, modify, and distribute this software for educational and non-commercial purposes.
