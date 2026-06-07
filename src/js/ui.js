@@ -7,11 +7,12 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  const tabs = ['home','camera','video','quiz','progress'];
+  const tabs = ['home', 'camera', 'video', 'quiz', 'progress'];
   const idx = tabs.indexOf(id);
   if (idx >= 0) document.querySelectorAll('.nav-tab')[idx].classList.add('active');
   if (id === 'progress') updateProgressPage();
-  if (id === 'video')    renderLetterSelector();
+  if (id === 'video') renderLetterSelector();
+  if (id === 'animasi') renderAnimasiGrid('all');
 }
 
 /* ── Alphabet Grids ── */
@@ -37,10 +38,10 @@ function updateAllGrids() {
 /* ── Reward Flash ── */
 function showReward(letter, message) {
   const fl = document.getElementById('rewardFlash');
-  const emojis = ['🎉','⭐','🌟','🎊','🏆','✨','🎈'];
+  const emojis = ['🎉', '⭐', '🌟', '🎊', '🏆', '✨', '🎈'];
   document.getElementById('rewardEmoji').textContent = emojis[Math.floor(Math.random() * emojis.length)];
-  document.getElementById('rewardMsg').textContent   = `Hebat! Itu huruf ${letter}!`;
-  document.getElementById('rewardSub').textContent   = message || 'Terus semangat belajar!';
+  document.getElementById('rewardMsg').textContent = `Hebat! Itu huruf ${letter}!`;
+  document.getElementById('rewardSub').textContent = message || 'Terus semangat belajar!';
   fl.classList.add('show');
   launchConfetti();
   setTimeout(() => fl.classList.remove('show'), 3000);
@@ -48,17 +49,17 @@ function showReward(letter, message) {
 
 /* ── Confetti ── */
 function launchConfetti() {
-  const colors = ['#FF6B6B','#4ECDC4','#FFE66D','#A78BFA','#6EE7B7','#FCA5A5'];
+  const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#A78BFA', '#6EE7B7', '#FCA5A5'];
   for (let i = 0; i < 30; i++) {
     const p = document.createElement('div');
     p.className = 'confetti-piece';
-    p.style.left             = Math.random() * 100 + 'vw';
-    p.style.background       = colors[Math.floor(Math.random() * colors.length)];
-    p.style.animationDuration= (1.5 + Math.random() * 2) + 's';
-    p.style.animationDelay   = Math.random() * 0.5 + 's';
-    p.style.width            = (8 + Math.random() * 12) + 'px';
-    p.style.height           = p.style.width;
-    p.style.borderRadius     = Math.random() > 0.5 ? '50%' : '4px';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+    p.style.animationDelay = Math.random() * 0.5 + 's';
+    p.style.width = (8 + Math.random() * 12) + 'px';
+    p.style.height = p.style.width;
+    p.style.borderRadius = Math.random() > 0.5 ? '50%' : '4px';
     document.body.appendChild(p);
     setTimeout(() => p.remove(), 3500);
   }

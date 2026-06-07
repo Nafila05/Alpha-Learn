@@ -43,6 +43,7 @@
       <div class="hero-badges">
         <div class="badge">📷 Deteksi Kamera AI</div>
         <div class="badge">✏️ Panduan Menulis</div>
+        <div class="badge">🎬 Animasi Menulis</div>
         <div class="badge">🎮 Kuis Seru</div>
         <div class="badge">⭐ Lacak Progress</div>
       </div>
@@ -69,6 +70,13 @@
         <p>Uji kemampuanmu dengan berbagai jenis kuis — pilihan ganda, menulis langsung, dan tebak gambar!</p>
         <button class="btn btn-purple" onclick="showPage('quiz')">Main Kuis →</button>
       </div>
+      <div class="card">
+        <span class="card-icon">🎬</span>
+        <h3>Animasi Menulis</h3>
+        <p>Tonton animasi cara menulis setiap huruf alfabet ikuti gerakan pena langkah demi langkah!</p>
+        <button class="btn" style="background:linear-gradient(135deg,#A78BFA,#6EE7B7);color:white"
+          onclick="showAnimasiPage('A')">Tonton Animasi →</button>
+      </div>
     </div>
 
     <h2 class="section-title">🔤 Alfabet Lengkap</h2>
@@ -79,7 +87,7 @@
   <!-- ══════════════ DETECT PAGE ══════════════ -->
   <div class="page" id="page-camera">
     <h2 class="section-title">🔍 Deteksi Huruf AI</h2>
-    <p class="section-subtitle">Pakai kamera langsung <b>atau</b> upload foto tulisan hurufmu — AI akan mendeteksinya!
+    <p class="section-subtitle">Pakai kamera langsung <b>atau</b> upload foto tulisan hurufmu AI akan mendeteksinya!
     </p>
 
     <div class="detect-mode-tabs">
@@ -271,7 +279,7 @@
               perlahan!</div>
           </div>
           <button class="btn btn-primary btn-sm" style="width:100%;margin-top:1rem;justify-content:center"
-            onclick="animateLetter()">🎬 Animasi Penulisan</button>
+            onclick="showAnimasiPage(currentLetter)">🎬 Animasi Penulisan</button>
           <button class="btn btn-accent btn-sm" style="width:100%;margin-top:8px;justify-content:center"
             onclick="showPage('quiz')">🎮 Mulai Kuis</button>
         </div>
@@ -405,6 +413,56 @@
     </div>
   </div>
 
+  <!-- ══════════════ ANIMASI MENULIS PAGE ══════════════ -->
+  <div class="page" id="page-animasi">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:0.5rem;flex-wrap:wrap">
+      <button class="btn btn-sm" style="background:#EDF2F7;color:#4A5568;flex-shrink:0" onclick="showPage('video')">←
+        Kembali</button>
+      <h2 class="section-title" style="margin:0">🎬 Animasi Menulis Huruf</h2>
+    </div>
+    <p class="section-subtitle">Tonton cara menulis setiap huruf — ikuti gerakan penanya!</p>
+
+    <!-- Filter huruf -->
+    <div class="animasi-filter-bar">
+      <button class="animasi-filter-btn active" onclick="filterAnimasi('all')">Semua Huruf</button>
+      <button class="animasi-filter-btn" onclick="filterAnimasi('A-G')">A – G</button>
+      <button class="animasi-filter-btn" onclick="filterAnimasi('H-N')">H – N</button>
+      <button class="animasi-filter-btn" onclick="filterAnimasi('O-U')">O – U</button>
+      <button class="animasi-filter-btn" onclick="filterAnimasi('V-Z')">V – Z</button>
+    </div>
+
+    <!-- Grid video -->
+    <div class="animasi-grid" id="animasiGrid"></div>
+
+    <!-- Modal player -->
+    <div class="animasi-modal-overlay" id="animasiModalOverlay" onclick="closeAnimasiModal()">
+      <div class="animasi-modal" onclick="event.stopPropagation()">
+        <button class="animasi-modal-close" onclick="closeAnimasiModal()">✕</button>
+        <div class="animasi-modal-header">
+          <span class="animasi-modal-letter" id="modalLetter">A</span>
+          <div>
+            <div class="animasi-modal-title" id="modalTitle">Huruf A</div>
+            <div class="animasi-modal-subtitle" id="modalSubtitle">🍎 Apel</div>
+          </div>
+        </div>
+        <div class="animasi-player-wrap">
+          <div id="animasiVideoWrap" class="animasi-video-wrap"></div>
+          <div class="animasi-player-controls">
+            <button class="animasi-ctrl-btn secondary" onclick="prevAnimasiLetter()">&#8592; Sebelum</button>
+            <button class="animasi-ctrl-btn secondary" onclick="nextAnimasiLetter()">Selanjut &#8594;</button>
+          </div>
+        </div>
+        <div class="animasi-stroke-list" id="animasiStrokeList"></div>
+        <div style="margin-top:1rem;text-align:center">
+          <button class="btn btn-secondary btn-sm"
+            onclick="closeAnimasiModal();selectLetter(currentAnimasiLetter);showPage('video')">✏️ Latihan
+            Menulis</button>
+          <button class="btn btn-purple btn-sm" onclick="closeAnimasiModal();showPage('quiz')">🎮 Kuis</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════════════ SCRIPTS (order matters!) ══════════════ -->
   <!-- Teachable Machine & TensorFlow.js -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -417,6 +475,7 @@
   <script src="src/js/learn.js"></script>
   <script src="src/js/quiz.js"></script>
   <script src="src/js/progress.js"></script>
+  <script src="src/js/animasi.js"></script>
 
   <script>
     // ── Bootstrap ──
